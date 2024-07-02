@@ -5,7 +5,7 @@ export default function Modal({ title, children, onClose }) {
   return createPortal(
     <>
       <div className="backdrop" onClick={onClose} />
-      <motion.dialog open className="modal" variants={{ hidden: {opacity: 0, y: 30}, visible: { opacity: 1, y: 0} }} initial="hidden" animate="visible" exit="hidden">
+      <motion.dialog open className="modal" variants={{ hidden: {opacity: 0, y: 30}, visible: { opacity: 1, y: 0} }} initial="hidden" animate="visible">
         <h2>{title}</h2>
         {children}
       </motion.dialog>

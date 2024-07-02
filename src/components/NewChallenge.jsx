@@ -3,6 +3,7 @@ import { useContext, useRef, useState } from 'react';
 import { ChallengesContext } from '../store/challenges-context.jsx';
 import Modal from './Modal.jsx';
 import images from '../assets/images.js';
+import { motion } from 'framer-motion';
 
 export default function NewChallenge({ onDone }) {
   const title = useRef();
@@ -56,17 +57,19 @@ export default function NewChallenge({ onDone }) {
           <input ref={deadline} type="date" name="deadline" id="deadline" />
         </p>
 
-        <ul id="new-challenge-images">
+        <motion.ul id="new-challenge-images" variants={{ visible: { transition: { staggerChildren: 0.075 } }  }}>
           {images.map((image) => (
-            <li
+            <motion.li
               key={image.alt}
+              variants={{ hidden: {opacity: 0, scale: 0.5}, visible: { opacity: 1, scale: [.8, 1.25, 1]} }}
+              exit={{ opacity: 1, scale: 1 }}
               onClick={() => handleSelectImage(image)}
               className={selectedImage === image ? 'selected' : undefined}
             >
               <img {...image} />
-            </li>
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
 
         <p className="new-challenge-actions">
           <button type="button" onClick={onDone}>
